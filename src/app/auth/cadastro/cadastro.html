@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuario</title>
+    <link rel="stylesheet" href="./cadastro.css">
+</head>
+<body>
+    <!-- Area principal da pagina. -->
+    <main class="cadastro-page">
+        <!-- Card central do formulario. -->
+        <section class="cadastro-card">
+            <!-- Links de navegacao. -->
+            <nav class="cadastro-nav">
+                <a href="/">Home</a>
+                <a href="/auth/login">Login</a>
+            </nav>
+
+            <!-- Titulo da tela de cadastro. -->
+            <header class="cadastro-header">
+                <h1>Cadastrar usuario</h1>
+                <p>Preencha os campos abaixo para criar sua conta.</p>
+            </header>
+
+            <!-- Formulario com os campos obrigatorios pedidos pelo professor. -->
+            <form class="cadastro-form" action="/api/auth/cadastro" method="post">
+                <!-- Campo Usuario. -->
+                <div class="cadastro-field">
+                    <label for="nome">Usuario</label>
+                    <input id="nome" name="nome" type="text" placeholder="Digite seu usuario" required>
+                </div>
+
+                <!-- Campo E-mail. -->
+                <div class="cadastro-field">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" type="email" placeholder="voce@email.com" required>
+                </div>
+
+                <!-- Campo Senha. -->
+                <div class="cadastro-field">
+                    <label for="senha">Senha</label>
+                    <input id="senha" name="senha" type="password" placeholder="Minimo de 4 caracteres" minlength="4" required>
+                </div>
+
+                <!-- Campo Confirmacao de Senha. -->
+                <div class="cadastro-field">
+                    <label for="confirmacaoSenha">Confirmacao de senha</label>
+                    <input id="confirmacaoSenha" name="confirmacaoSenha" type="password" placeholder="Repita sua senha" minlength="4" required>
+                </div>
+
+                <!-- Botao de envio. No React, o onSubmit com fetch fica no cadastro.js. -->
+                <button type="submit">Criar conta</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
