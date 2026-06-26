@@ -67,11 +67,15 @@ export async function POST (request){
             {status: 201}
         );
     }
-    catch(error){
-        //falha de validação do Zod
+    catch (error) {
         console.error("Erro capturado no cadastro:", error);
-        if (error instanceof z.ZodError || (error && error.errors)) {
-            const listaErros = error.errors || [];
+
+        // Tratamento robusto para erros do Zod
+        if (error instanceof z.ZodError) {
+            // O error.issues é a forma mais segura de mapear erros no Zod moderno
+            const listaErros = error.issues || error.errors || [];
+            
+            // Pega a mensagem do primeiro erro que encontrar
             const primeiraMensagem = listaErros[0]?.message || "Dados inválidos.";
             
             return NextResponse.json(
@@ -79,10 +83,11 @@ export async function POST (request){
                 { status: 400 }
             );
         }
-        //resposta genérica
+
+        // Resposta genérica para outros erros do servidor
         return NextResponse.json(
-            {erro: "Erro interno desconhecido."},
-            {status: 500}
+            { erro: "Erro interno desconhecido." },
+            { status: 500 }
         );
     }
 }
