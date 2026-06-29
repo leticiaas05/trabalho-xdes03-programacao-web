@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "51fd1928-a865-47c3-afa6-97f76018b592",
+    "usuarioId": "1c278c75-db68-4804-9ebb-236a3ceb78e9",
+    "tmdbId": 550,
+    "titulo": "Clube da Luta",
+    "cartaz": "/pB8BM7pdSp6B6Ih7QZ4wQvI8Z1L.jpg",
+    "status": "Assistido",
+    "nota": 5,
+    "comentario": ""
+  }
+]

@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
-import { file } from 'zod';
 
 const caminhoArquivo = path.join(process.cwd(), 'data', 'filmes_usuario.json');
 
@@ -9,7 +8,7 @@ async function lerBD() {
     try {
         const dadosPuros = await fs.readFile(caminhoArquivo, 'utf-8');
         return JSON.parse(dadosPuros);
-    } catch (error) {
+    } catch {
         return [];
     }
 }
@@ -17,7 +16,7 @@ async function lerBD() {
 //Atualizar status, nota e comentário
 export async function PUT(request, {params}){
     const usuarioId = request.headers.get('x-user-id');
-    const filmeId = params.id;
+    const { id: filmeId } = await params;
 
     try{
         const body = await request.json();
@@ -45,7 +44,7 @@ export async function PUT(request, {params}){
             {status: 200}
         );
     }
-    catch(error){
+    catch{
         return NextResponse.json(
             {erro: "Erro ao atualizar o filme!"},
             {status: 500}
@@ -56,7 +55,7 @@ export async function PUT(request, {params}){
 //remover filme da lista
 export async function DELETE(request, {params}) {
     const usuarioId = request.headers.get('x-user-id');
-    const filmeId = params.id;
+    const { id: filmeId } = await params;
 
     try{
         const todosOsFilmes = await lerBD();
@@ -83,7 +82,7 @@ export async function DELETE(request, {params}) {
             {status: 200}
         );
     }
-    catch(error){
+    catch{
         return NextResponse.json(
             {erro: "Erro ao deletar o filme."},
             {status: 500}
