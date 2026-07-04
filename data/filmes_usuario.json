@@ -18,5 +18,35 @@
     "status": "Assistido",
     "nota": 5,
     "comentario": "AMei"
+  },
+  {
+    "id": "45d9f567-69ba-41bd-a69b-6a8b6502935b",
+    "usuarioId": "dd3ace9e-3827-4276-a1b6-1a98b77d3fea",
+    "tmdbId": 1339713,
+    "titulo": "Obsessão",
+    "cartaz": "/yhtt7IdzjJ6Vwh1AcG54QFYPtwf.jpg",
+    "status": "Wishlist",
+    "nota": 0,
+    "comentario": ""
+  },
+  {
+    "id": "47c06c8b-6400-45d1-a9de-f9ea10a2e110",
+    "usuarioId": "dd3ace9e-3827-4276-a1b6-1a98b77d3fea",
+    "tmdbId": 1202033,
+    "titulo": "Enola Holmes 3",
+    "cartaz": "/dxqsd2iYZGzZafGxFWbHaDFACMp.jpg",
+    "status": "Assistido",
+    "nota": 5,
+    "comentario": "Adicionado via recomendações."
+  },
+  {
+    "id": "3426a0a7-4d47-4045-9a7e-01c210197000",
+    "usuarioId": "dd3ace9e-3827-4276-a1b6-1a98b77d3fea",
+    "tmdbId": 1314481,
+    "titulo": "O Diabo Veste Prada 2",
+    "cartaz": "/50yWyY981TyUHhoxxSEKwO70FmQ.jpg",
+    "status": "Assistido",
+    "nota": 5,
+    "comentario": "filmasso"
   }
 ]

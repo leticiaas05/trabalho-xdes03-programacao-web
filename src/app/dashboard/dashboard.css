@@ -378,3 +378,153 @@ button:disabled {
     white-space: nowrap;
   }
 }
+
+/* --- Seção e Header do Carrossel --- */
+.recommended-section {
+  margin-bottom: 24px;
+}
+
+.recommended-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Controles de Navegação */
+.carousel-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.carousel-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #171717;
+  color: #ffffff;
+  border: 1px solid #262626;
+  font-size: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.carousel-arrow:hover {
+  background: #dc2626;
+  border-color: #ef4444;
+  transform: scale(1.05);
+}
+
+/* Área de Rolagem do Carrossel */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.recommended-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth; /* Garante a transição suave */
+  padding: 4px 4px 12px 4px;
+  
+  /* Esconde a scrollbar no Firefox e IE */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+/* Esconde a scrollbar no Chrome, Safari e Opera */
+.recommended-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cards do Carrossel */
+.recommended-card {
+  flex: 0 0 170px; /* Largura fixa ideal para carrossel */
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #262626;
+  background: #171717;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.recommended-card:hover {
+  transform: translateY(-4px);
+  border-color: #dc2626;
+}
+
+.recommended-poster {
+  width: 100%;
+  height: 100%;
+}
+
+.recommended-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recommended-poster span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #a3a3a3;
+}
+
+.recommended-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 20%, rgba(10, 10, 10, 0.4) 60%, transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.recommended-card:hover .recommended-overlay {
+  opacity: 1;
+}
+
+.recommended-overlay h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.recommended-genre {
+  font-size: 0.7rem;
+  color: #ef4444;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.section-divider {
+  border: 0;
+  border-top: 1px solid #262626;
+  margin: 24px 0 32px 0;
+}
