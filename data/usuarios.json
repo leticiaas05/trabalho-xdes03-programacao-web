@@ -10,17 +10,5 @@
     "nome": "2134234",
     "email": "agiota@mgalk.com",
     "senha": "$2b$10$M8ySlMoSqQbRxZwuVmZvYehhegyrrR5OlaEa1MuXeIyfws3c.ybLK"
-  },
-  {
-    "id": "20e0bb5b-3941-4eb7-9463-6938e6e24fec",
-    "nome": "kleverton",
-    "email": "kleverton@gmail.com",
-    "senha": "$2b$10$R6xfzMy5SMTkDKZa3T5M5uosH8fPermFZMrvLAAxoYi.7zgBZILIK"
-  },
-  {
-    "id": "1c278c75-db68-4804-9ebb-236a3ceb78e9",
-    "nome": "Usuario Teste Codex",
-    "email": "codex.teste.1782769289537@example.com",
-    "senha": "$2b$10$Sn0HcT0waUYbO8KuuV2BrObasqwzwwRIpg9vRN1WKJC9MbnxEPG2y"
   }
 ]

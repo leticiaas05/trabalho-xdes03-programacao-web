@@ -8,84 +8,95 @@ async function lerBD() {
     try {
         const dadosPuros = await fs.readFile(caminhoArquivo, 'utf-8');
         return JSON.parse(dadosPuros);
-    } catch {
+    } catch (error) {
         return [];
     }
 }
 
-//Atualizar status, nota e comentário
-export async function PUT(request, {params}){
+// 1. ATUALIZAR FILME (PUT)
+export async function PUT(request, { params }) {
     const usuarioId = request.headers.get('x-user-id');
-    const { id: filmeId } = await params;
+    
+    try {
+        // Resolve os parâmetros da URL com segurança e limpa espaços invisíveis
+        const resolvidos = await params;
+        const filmeId = String(resolvidos.id).trim();
 
-    try{
         const body = await request.json();
         const todosOsFilmes = await lerBD();
 
-        //busca o index do filme, com a garantia de que ele pertence ao usuário logado
+        // Busca o índice convertendo ambos os lados para String limpa
         const indexFilme = todosOsFilmes.findIndex(
-            filme => filme.id === filmeId && filme.usuarioId === usuarioId
+            filme => String(filme.id).trim() === filmeId && filme.usuarioId === usuarioId
         );
 
-        if(indexFilme === -1){
+        if (indexFilme === -1) {
             return NextResponse.json(
-                {erro: 'Filme não encontrado na sua lista!'},
-                {status: 404}
+                { erro: 'Filme não encontrado na sua lista!' },
+                { status: 404 }
             );
         }
 
+        // Atualiza os dados para assistido
         todosOsFilmes[indexFilme].status = "Assistido";
         todosOsFilmes[indexFilme].nota = Number(body.nota);
         todosOsFilmes[indexFilme].comentario = body.comentario;
 
+        // Grava de volta no arquivo
         await fs.writeFile(caminhoArquivo, JSON.stringify(todosOsFilmes, null, 2), 'utf-8');
+        
         return NextResponse.json(
             todosOsFilmes[indexFilme],
-            {status: 200}
+            { status: 200 }
         );
     }
-    catch{
+    catch (error) {
         return NextResponse.json(
-            {erro: "Erro ao atualizar o filme!"},
-            {status: 500}
-        )
+            { erro: "Erro ao atualizar o filme!" },
+            { status: 500 }
+        );
     }
 }
 
-//remover filme da lista
-export async function DELETE(request, {params}) {
+// 2. REMOVER FILME (DELETE)
+export async function DELETE(request, { params }) {
     const usuarioId = request.headers.get('x-user-id');
-    const { id: filmeId } = await params;
+    
+    try {
+        // Resolve os parâmetros da URL com segurança e limpa espaços invisíveis
+        const resolvidos = await params;
+        const filmeId = String(resolvidos.id).trim();
 
-    try{
         const todosOsFilmes = await lerBD();
 
+        // Verifica se o filme existe comparando como String
         const filmeExiste = todosOsFilmes.some(
-            filme => filme.id === filmeId && filme.usuarioId === usuarioId
+            filme => String(filme.id).trim() === filmeId && filme.usuarioId === usuarioId
         );
 
-        if(!filmeExiste){
+        if (!filmeExiste) {
             return NextResponse.json(
-                {erro: "Filme não encontrado!"},
-                {status: 404}
+                { erro: "Filme não encontrado!" },
+                { status: 404 }
             );
         }
 
-        //pega todos os filmes, exceto o que será excluido (filter reverso)
+        // Filtra o array removendo o filme correspondente
         const arrayFiltrado = todosOsFilmes.filter(
-            filme => !(filme.id === filmeId && filme.usuarioId === usuarioId)
+            filme => !(String(filme.id).trim() === filmeId && filme.usuarioId === usuarioId)
         );
 
         await fs.writeFile(caminhoArquivo, JSON.stringify(arrayFiltrado, null, 2), 'utf-8');
+        
         return NextResponse.json(
-            {mensagem: "Filme removido com sucesso!"},
-            {status: 200}
+            { mensagem: "Filme removido com sucesso!" },
+            { status: 200 }
         );
     }
-    catch{
+    catch (error) {
         return NextResponse.json(
-            {erro: "Erro ao deletar o filme."},
-            {status: 500}
-        )
+            { erro: "Erro ao deletar o filme!" },
+            { status: 500 }
+        );
     }
 }

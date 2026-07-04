@@ -50,11 +50,10 @@ export function LoginForm() {
       }
 
       // Salva o Token JWT nos Cookies por 1 dia para iniciar a protecao das rotas.
-      document.cookie = `auth_token=${encodeURIComponent(data.token)}; path=/; max-age=86400; SameSite=Lax`;
+      document.cookie = `token=${encodeURIComponent(data.token)}; path=/; max-age=86400; SameSite=Lax`;
 
       setFeedback({ type: "success", message: data.mensagem || "Login realizado com sucesso." });
       setForm(initialFormState);
-      window.location.href = "/dashboard";
     } catch (error) {
       setFeedback({
         type: "error",

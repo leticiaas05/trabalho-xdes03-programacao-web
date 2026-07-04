@@ -29,8 +29,8 @@ function FilmeCard({ filme, onRemove, onOpenReview, isBusy }) {
 
         {filme.status === "Assistido" ? (
           <div className="movie-review">
-            <strong>Nota {filme.nota || 0}/5</strong>
-            <p>{filme.comentario || "Sem comentario."}</p>
+            <strong>★ {filme.nota || 0}/5</strong>
+            <p className="movie-comment">&ldquo;{filme.comentario || "Sem comentário."}&rdquo;</p>
           </div>
         ) : (
           <p className="movie-status">Na sua wishlist</p>
@@ -43,7 +43,7 @@ function FilmeCard({ filme, onRemove, onOpenReview, isBusy }) {
             disabled={isBusy}
             onClick={() => onOpenReview(filme)}
           >
-            {filme.status === "Assistido" ? "Editar avaliacao" : "Ja assisti"}
+            {filme.status === "Assistido" ? "Editar avaliação" : "Já assisti!"}
           </button>
 
           <button
@@ -74,7 +74,7 @@ export function DashboardClient() {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.erro || "Nao foi possivel carregar seus filmes.");
+      throw new Error(data.erro || "Não foi possível carregar seus filmes.");
     }
 
     return Array.isArray(data) ? data : [];
@@ -174,7 +174,7 @@ export function DashboardClient() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.erro || "Nao foi possivel remover o filme.");
+        throw new Error(data.erro || "Não foi possível remover o filme.");
       }
 
       setFilmes((filmesAtuais) =>
@@ -215,7 +215,7 @@ export function DashboardClient() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.erro || "Nao foi possivel salvar a avaliacao.");
+        throw new Error(data.erro || "Não foi possível salvar a avaliação.");
       }
 
       setFilmes((filmesAtuais) =>
@@ -224,14 +224,14 @@ export function DashboardClient() {
       setActiveTab("Assistido");
       setReviewMovie(null);
       setReviewForm({ nota: "5", comentario: "" });
-      setFeedback({ type: "success", message: "Avaliacao salva com sucesso." });
+      setFeedback({ type: "success", message: "Avaliação salva com sucesso." });
     } catch (error) {
       setFeedback({
         type: "error",
         message:
           error instanceof Error
             ? error.message
-            : "Erro inesperado ao salvar a avaliacao.",
+            : "Erro inesperado ao salvar a avaliação.",
       });
     } finally {
       setBusyId(null);
@@ -246,10 +246,14 @@ export function DashboardClient() {
   return (
     <main className="dashboard-page">
       <nav className="dashboard-nav">
-        <Link href="/">MovieList</Link>
+        <Link href="/" className="brand-logo">
+          Sétima<span>Crítica</span>
+        </Link>
         <div className="dashboard-nav-actions">
-          <Link href="/auth/login">Login</Link>
-          <button type="button" onClick={sair}>
+          <Link href="/dashboard/busca" className="primary-button add-button">
+            + Adicionar Filme
+          </Link>
+          <button type="button" className="logout-button" onClick={sair}>
             Sair
           </button>
         </div>
@@ -261,7 +265,7 @@ export function DashboardClient() {
             <p>Meu painel</p>
             <h1>Minha lista de filmes</h1>
           </div>
-          <button type="button" className="primary-button" onClick={carregarFilmes}>
+          <button type="button" className="refresh-button" onClick={carregarFilmes}>
             Atualizar
           </button>
         </header>
@@ -272,14 +276,14 @@ export function DashboardClient() {
             className={activeTab === "Wishlist" ? "active" : ""}
             onClick={() => setActiveTab("Wishlist")}
           >
-            Wishlist <span>{wishlist.length}</span>
+            Quero Assistir <span>{wishlist.length}</span>
           </button>
           <button
             type="button"
             className={activeTab === "Assistido" ? "active" : ""}
             onClick={() => setActiveTab("Assistido")}
           >
-            Filmes Assistidos <span>{assistidos.length}</span>
+            Já Assistidos <span>{assistidos.length}</span>
           </button>
         </div>
 
@@ -307,8 +311,8 @@ export function DashboardClient() {
           ) : (
             <p className="empty-state">
               {activeTab === "Wishlist"
-                ? "Sua wishlist ainda esta vazia."
-                : "Voce ainda nao avaliou nenhum filme."}
+                ? "Sua lista de desejos está vazia."
+                : "Você ainda não avaliou nenhum filme."}
             </p>
           )}
         </section>
@@ -319,7 +323,7 @@ export function DashboardClient() {
           <form className="review-modal" onSubmit={salvarAvaliacao}>
             <header>
               <p>{reviewMovie.titulo}</p>
-              <h2>Dar nota e comentario</h2>
+              <h2>{reviewMovie.status === "Assistido" ? "Editar crítica" : "Escrever crítica"}</h2>
             </header>
 
             <label>
@@ -333,20 +337,21 @@ export function DashboardClient() {
                   }))
                 }
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="5">★★★★★ (Excelente)</option>
+                <option value="4">★★★★☆ (Muito Bom)</option>
+                <option value="3">★★★☆☆ (Bom)</option>
+                <option value="2">★★☆☆☆ (Ruim)</option>
+                <option value="1">★☆☆☆☆ (Péssimo)</option>
               </select>
             </label>
 
             <label>
-              Comentario
+              Sua avaliação
               <textarea
                 value={reviewForm.comentario}
                 rows={4}
-                placeholder="O que voce achou do filme?"
+                required
+                placeholder="Modifique seus comentários sobre o filme..."
                 onChange={(event) =>
                   setReviewForm((current) => ({
                     ...current,
@@ -365,7 +370,7 @@ export function DashboardClient() {
                 Cancelar
               </button>
               <button type="submit" className="primary-button" disabled={Boolean(busyId)}>
-                {busyId ? "Salvando..." : "Salvar avaliacao"}
+                {busyId ? "Salvando..." : "Salvar alterações"}
               </button>
             </div>
           </form>
