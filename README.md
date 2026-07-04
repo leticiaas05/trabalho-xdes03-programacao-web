@@ -59,13 +59,14 @@ O objetivo central do sistema é permitir que usuários gerenciem suas bibliotec
 ## Instruções para Execução do Projeto
 
 1. Instale as dependências gerenciadas pelo NPM:
-   npm install
-2. Configuração das Variáveis de Ambiente
+   ```bash
+     npm install
+3. Configuração das Variáveis de Ambiente
    Crie um arquivo na raiz do projeto chamado .env.local 
-   # Chave secreta utilizada para a criptografia e assinatura dos tokens JWT
+   ```javascript
     JWT_SECRET=senha_testes_env
-   # Chave de autenticação (API Key ou Read Access Token) obtida na plataforma TMDB
     TMDB_API_KEY=379bd211dff380c96cd46d5f1873fd9c
-3. Execute o servidor de desenvolvimento:
-   npm run dev
+4. Execute o servidor de desenvolvimento:
+   ```bash
+     npm run dev
 5. Acesse a aplicação por meio do navegador no endereço http://localhost:3000
