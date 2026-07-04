@@ -76,7 +76,7 @@ export default function Login() {
               type="password"
               required
               className="w-full bg-neutral-800 text-white border border-neutral-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-red-600 transition-colors"
-              placeholder="••••••••"
+              placeholder=""
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
