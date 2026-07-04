@@ -10,7 +10,7 @@ export const config = {
     */
     matcher: [
         '/',
-        '/((?!auth|_next/static|_next/image|favicon.ico|api/auth).*)',
+        '/((?!auth|_next/static|_next/image|favicon.ico|api/auth|api/tmdb).*)',
         '/api/filmes/:path*'
     ]
 };
