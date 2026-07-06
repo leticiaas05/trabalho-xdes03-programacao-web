@@ -14,10 +14,7 @@ async function lerBD(){
     }
 }
 
-
-//listagem de filmes do usuário logado
 export async function GET(request){
-    // Captura o ID do usuário que o Middleware já validou
     const usuarioId = request.headers.get('x-user-id');
 
     try{
@@ -34,7 +31,6 @@ export async function GET(request){
     }
 }
 
-//Buscar filme da API TMDB e salvar para o usuário logado
 export async function POST(request){
     const usuarioId = request.headers.get('x-user-id');
 
@@ -50,7 +46,6 @@ export async function POST(request){
 
         const todosOsFilmes = await lerBD();
 
-        //Validar se o usuário já possui o filme inserido em alguma das listas
         const filmeJaAdicionado = todosOsFilmes.some(
             filme => filme.usuarioId === usuarioId && filme.tmdbId === body.tmdbId
         );
@@ -61,7 +56,6 @@ export async function POST(request){
             );
         }
 
-        //unir os dados do TMDB com o Banco de Dados
         const novoFilme = {
             id: crypto.randomUUID(),
             usuarioId: usuarioId,

@@ -1,7 +1,7 @@
 .dashboard-page {
   min-height: 100vh;
-  background: #0a0a0a; /* Fundo neutral-950 imersivo */
-  color: #ffffff;      /* Texto totalmente branco */
+  background: #0a0a0a; 
+  color: #ffffff;
   font-family: sans-serif;
 }
 
@@ -11,8 +11,8 @@
   justify-content: space-between;
   gap: 16px;
   padding: 16px clamp(16px, 4vw, 48px);
-  border-bottom: 1px solid #262626; /* neutral-800 */
-  background: rgba(23, 23, 23, 0.5); /* neutral-900 com opacidade */
+  border-bottom: 1px solid #262626;
+  background: rgba(23, 23, 23, 0.5);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -29,7 +29,7 @@
 }
 
 .brand-logo span {
-  color: #dc2626; /* Vermelho icônico */
+  color: #dc2626;
 }
 
 .dashboard-nav-actions {
@@ -61,9 +61,9 @@
 }
 
 .logout-button {
-  background: #262626; /* neutral-800 */
-  color: #d4d4d4;      /* neutral-300 */
-  border: 1px solid #404040; /* neutral-700 */
+  background: #262626;
+  color: #d4d4d4;
+  border: 1px solid #404040;
 }
 
 .logout-button:hover {
@@ -87,7 +87,7 @@
 .dashboard-header p,
 .review-modal header p {
   margin: 0 0 6px;
-  color: #a3a3a3; /* neutral-400 */
+  color: #a3a3a3;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -102,7 +102,7 @@
 }
 
 .refresh-button {
-  background: #171717; /* neutral-900 */
+  background: #171717;
   color: #a3a3a3;
   border: 1px solid #262626;
 }
@@ -139,7 +139,7 @@
 
 .danger-button:hover {
   background: #262626;
-  color: #f87171; /* Vermelho claro no hover */
+  color: #f87171;
   border-color: #ef4444;
 }
 
@@ -159,7 +159,7 @@ button:disabled {
   border: 0;
   border-bottom: 2px solid transparent;
   background: transparent;
-  color: #737373; /* neutral-500 */
+  color: #737373;
   padding: 12px 4px;
   font-size: 1.125rem;
   font-weight: 700;
@@ -230,7 +230,7 @@ button:disabled {
   overflow: hidden;
   border: 1px solid #262626;
   border-radius: 12px;
-  background: #171717; /* neutral-900 */
+  background: #171717;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 }
 
@@ -282,7 +282,7 @@ button:disabled {
 }
 
 .movie-review strong {
-  color: #eab308; /* Estrelas em Amarelo Ouro */
+  color: #eab308;
   font-size: 0.9rem;
 }
 
@@ -307,7 +307,7 @@ button:disabled {
   align-items: center;
   justify-content: center;
   padding: 18px;
-  background: rgba(0, 0, 0, 0.85); /* Backdrop bem escuro */
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(4px);
   z-index: 50;
 }
@@ -317,7 +317,7 @@ button:disabled {
   display: grid;
   gap: 20px;
   border-radius: 16px;
-  background: #171717; /* Modal neutral-900 */
+  background: #171717;
   padding: 24px;
   border: 1px solid #262626;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
@@ -340,7 +340,7 @@ button:disabled {
   border-radius: 8px;
   padding: 12px;
   color: #ffffff;
-  background: #262626; /* Input dark */
+  background: #262626;
   font: inherit;
   font-size: 0.9rem;
 }
@@ -379,7 +379,6 @@ button:disabled {
   }
 }
 
-/* --- Seção e Header do Carrossel --- */
 .recommended-section {
   margin-bottom: 24px;
 }
@@ -399,7 +398,6 @@ button:disabled {
   letter-spacing: -0.02em;
 }
 
-/* Controles de Navegação */
 .carousel-controls {
   display: flex;
   gap: 8px;
@@ -429,7 +427,6 @@ button:disabled {
   transform: scale(1.05);
 }
 
-/* Área de Rolagem do Carrossel */
 .carousel-wrapper {
   position: relative;
   width: 100%;
@@ -439,22 +436,18 @@ button:disabled {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  scroll-behavior: smooth; /* Garante a transição suave */
+  scroll-behavior: smooth;
   padding: 4px 4px 12px 4px;
-  
-  /* Esconde a scrollbar no Firefox e IE */
   scrollbar-width: none; 
   -ms-overflow-style: none; 
 }
 
-/* Esconde a scrollbar no Chrome, Safari e Opera */
 .recommended-row::-webkit-scrollbar {
   display: none;
 }
 
-/* Cards do Carrossel */
 .recommended-card {
-  flex: 0 0 170px; /* Largura fixa ideal para carrossel */
+  flex: 0 0 170px;
   position: relative;
   aspect-ratio: 2 / 3;
   border-radius: 8px;

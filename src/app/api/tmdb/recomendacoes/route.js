@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 
-// Certifique-se de usar EXPORT ASYNC FUNCTION GET (em maiúsculas)
 export async function GET() {
     const apiKey = process.env.TMDB_API_KEY;
     if (!apiKey) {
@@ -23,7 +22,7 @@ export async function GET() {
         }
 
         const filmesMapeados = dados.results.slice(0, 10).map((filme) => ({
-            id: filme.id.toString(), // garante ID como string se necessário
+            id: filme.id.toString(),
             idOrigem: filme.id,
             titulo: filme.title || filme.original_title || "Título Desconhecido",
             cartaz: filme.poster_path || null

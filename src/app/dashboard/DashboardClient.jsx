@@ -342,10 +342,6 @@ export function DashboardClient() {
       </nav>
 
       <section className="dashboard-shell">
-        
-
-        
-
         <header className="dashboard-header">
           <div>
             <p>Meu painel</p>

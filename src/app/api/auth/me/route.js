@@ -11,14 +11,12 @@ export async function GET(request) {
         const dadosPuros = await fs.readFile(caminhoUsuarios, 'utf-8');
         const usuarios = JSON.parse(dadosPuros);
 
-        // Encontra o usuário correspondente
         const usuarioEncontrado = usuarios.find(u => u.id === usuarioId);
 
         if (!usuarioEncontrado) {
             return NextResponse.json({ erro: "Usuário não encontrado." }, { status: 404 });
         }
 
-        // Retorna apenas os dados públicos, sem a senha
         return NextResponse.json({
                 id: usuarioEncontrado.id,
                 nome: usuarioEncontrado.nome,

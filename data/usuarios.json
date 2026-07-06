@@ -10,5 +10,11 @@
     "nome": "2134234",
     "email": "agiota@mgalk.com",
     "senha": "$2b$10$M8ySlMoSqQbRxZwuVmZvYehhegyrrR5OlaEa1MuXeIyfws3c.ybLK"
+  },
+  {
+    "id": "cd038921-8649-4177-a642-9bb5d9fcf8a5",
+    "nome": "Maria",
+    "email": "maria@gmail.com",
+    "senha": "$2b$10$U.M8eBKXxVGGhf80y7zm5u1NywC2JVjxXxcCXnefbIvb9Xw/0VV5q"
   }
 ]

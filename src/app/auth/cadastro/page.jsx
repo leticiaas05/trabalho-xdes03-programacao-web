@@ -14,35 +14,30 @@ export default function Cadastro() {
   const router = useRouter();
 
   const handleCadastro = async (e) => {
-  e.preventDefault();
-  setErro('');
-  setCarregando(true);
+    e.preventDefault();
+    setErro('');
+    setCarregando(true);
 
-  try {
-    const res = await fetch('/api/auth/cadastro', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, email, senha, confirmacaoSenha }),
-    });
+    try {
+      const res = await fetch('/api/auth/cadastro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, senha, confirmacaoSenha }),
+      });
 
-    // 1. Converte a resposta para JSON primeiro, mesmo se o status for 400 ou 500
-    const dados = await res.json();
+      const dados = await res.json();
 
-    // 2. Se a resposta não for OK (status diferente de 2xx), captura o erro do seu Back-end
-    if (!res.ok) {
-      // Se a sua API mandou { erro: "As senhas devem ser iguais." }, o dados.erro vai capturar perfeitamente!
-      throw new Error(dados.erro || 'Erro ao realizar cadastro.');
+      if (!res.ok) {
+        throw new Error(dados.erro || 'Erro ao realizar cadastro.');
+      }
+
+      router.push('/auth/login'); 
+    } catch (err) {
+      console.log(err); 
+      setErro(err.message);
+    } finally {
+      setCarregando(false);
     }
-
-    // Se deu certo (Status 201), redireciona
-    router.push('/auth/login'); 
-  } catch (err) {
-    console.log(err); 
-    // 3. Alimenta o estado 'erro' com a mensagem exata do Zod para exibir no card vermelho
-    setErro(err.message);
-  } finally {
-    setCarregando(false);
-  }
 };
 
   return (
@@ -100,7 +95,6 @@ export default function Cadastro() {
             />
           </div>
 
-          {/* NOVO CAMPO: Confirmação de Senha */}
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-1.5">Confirmar Senha</label>
             <input

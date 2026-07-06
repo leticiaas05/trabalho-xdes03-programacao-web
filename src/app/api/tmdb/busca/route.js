@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
-    // 1. Captura o termo de busca enviado pela URL
     const { searchParams } = new URL(request.url);
     const termo = searchParams.get('query');
 
@@ -23,15 +22,12 @@ export async function GET(request) {
             return NextResponse.json({ erro: "Falha ao consultar o serviço TMDB externo." }, { status: respostaTMDB.status });
         }
 
-        // CORREÇÃO CENTRAL: Primeiro esperamos o JSON converter por completo
         const dados = await respostaTMDB.json();
 
-        // Verificação de segurança para garantir que o TMDB retornou a lista de resultados
         if (!dados || !dados.results) {
             return NextResponse.json([], { status: 200 });
         }
 
-        // Mapeamos os filmes limpando os campos para o formato que seu CRUD espera
         const filmesMapeados = dados.results.map((filme) => ({
             id: filme.id,
             title: filme.title || filme.original_title || "Título Desconhecido",

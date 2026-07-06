@@ -29,8 +29,7 @@ export default function Login() {
         throw new Error(dados.erro || 'E-mail ou senha incorretos.');
       }
 
-      // Sucesso! O cookie já foi injetado pelo Back-end. Vamos para o painel.
-      router.push('/dashboard');
+      router.push('/');
     } catch (err) {
       setErro(err.message);
     } finally {
@@ -42,7 +41,6 @@ export default function Login() {
     <div className="min-h-screen bg-neutral-950 flex items-center justify-center px-4 relative overflow-hidden"
          style={{ backgroundImage: 'radial-gradient(circle at center, #1e1b4b 0%, #0a0a0a 100%)' }}>
       
-      {/* Card Principal */}
       <div className="w-full max-w-md bg-neutral-900/80 backdrop-blur-md p-8 rounded-2xl border border-neutral-800 shadow-2xl">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-extrabold text-white tracking-wider">

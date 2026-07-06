@@ -4,32 +4,23 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-// Simulação de dados que o TMDB devolveria na busca
-// Substitua o array do topo do seu arquivo src/app/dashboard/busca/page.jsx por este:
-// Substitua o array do topo do seu arquivo src/app/dashboard/busca/page.jsx por este:
-
-
 export default function BuscaTMDB() {
   const [termo, setTermo] = useState('');
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Estados do Novo Modal de Inserção Direta para Assistidos
   const [filmeParaAvaliar, setFilmeParaAvaliar] = useState(null);
   const [nota, setNota] = useState(5);
   const [comentario, setComentario] = useState('');
 
   const router = useRouter();
 
-  // Simula a busca na base do TMDB
-  // Substitua a antiga função handleBuscar por esta versão real conectada à API:
   const handleBuscar = async (e) => {
     e.preventDefault();
     if (!termo.trim()) return;
 
     setLoading(true);
     try {
-      // Faz a requisição para a nossa rota ponte passando o termo digitado
       const res = await fetch(`/api/tmdb/busca?query=${encodeURIComponent(termo)}`);
       
       if (!res.ok) {
@@ -46,7 +37,6 @@ export default function BuscaTMDB() {
     }
   };
 
-  // DISPARA O POST REAL PARA A SUA API
   const salvarNoBackEnd = async (corpoRequisicao, tituloFilme) => {
     try {
       const res = await fetch('/api/filmes', {
@@ -63,7 +53,6 @@ export default function BuscaTMDB() {
 
       alert(`"${tituloFilme}" foi adicionado com sucesso ao seu Sétima Crítica!`);
       
-      // Limpa o modal caso estivesse aberto
       setFilmeParaAvaliar(null);
       setComentario('');
       setNota(5);
@@ -72,25 +61,23 @@ export default function BuscaTMDB() {
     }
   };
 
-  // Fluxo 1: Adicionar direto na Wishlist (Sem Modal)
   const handleWishlistDireto = (filmeTMDB) => {
     const mapaCorpo = {
       tmdbId: filmeTMDB.id,
       titulo: filmeTMDB.title,
-      cartaz: filmeTMDB.poster_path, // <--- GARANTA QUE ESTÁ EXATAMENTE ASSIM
+      cartaz: filmeTMDB.poster_path,
       status: 'Wishlist'
     };
     salvarNoBackEnd(mapaCorpo, filmeTMDB.title);
   };
 
-  // Fluxo 2: Envio do formulário do Modal (Quando já assistiu)
   const handleEnviarComAvaliacao = (e) => {
     e.preventDefault();
     
     const mapaCorpo = {
       tmdbId: filmeParaAvaliar.id,
       titulo: filmeParaAvaliar.title,
-      cartaz: filmeParaAvaliar.poster_path, // <--- GARANTA QUE ESTÁ EXATAMENTE ASSIM
+      cartaz: filmeParaAvaliar.poster_path,
       status: 'Assistido',
       nota: nota,
       comentario: comentario
@@ -102,7 +89,6 @@ export default function BuscaTMDB() {
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sans">
       
-      {/* BARRA SUPERIOR */}
       <nav className="border-b border-neutral-800 bg-neutral-900/50 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-6">
           <h1 className="text-2xl font-black tracking-wider">
@@ -114,14 +100,12 @@ export default function BuscaTMDB() {
         </div>
       </nav>
 
-      {/* CONTEÚDO */}
       <main className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold mb-2">Expandir Catálogo</h2>
           <p className="text-neutral-400 text-sm">Pesquise filmes na base do TMDB para alimentar sua lista pessoal.</p>
         </div>
 
-        {/* FORMULÁRIO DE BUSCA */}
         <form onSubmit={handleBuscar} className="flex gap-3 max-w-2xl mx-auto mb-12">
           <input
             type="text"
@@ -140,13 +124,11 @@ export default function BuscaTMDB() {
 
         {loading && <p className="text-center text-neutral-500">Consultando base do TMDB...</p>}
 
-        {/* GRID DE RESULTADOS DA BUSCA */}
         {!loading && resultados.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {resultados.map((filme) => (
               <div key={filme.id} className="bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 flex flex-col justify-between shadow-lg">
                 
-                {/* Imagem do Cartaz */}
                 <div className="relative aspect-[2/3] bg-neutral-800">
                   <img
                     src={`https://image.tmdb.org/t/p/w500${filme.poster_path}`}
@@ -155,7 +137,6 @@ export default function BuscaTMDB() {
                   />
                 </div>
 
-                {/* Info e Ações */}
                 <div className="p-4 space-y-3">
                   <h3 className="font-bold text-base text-neutral-100 line-clamp-1">{filme.title}</h3>
                   
@@ -185,7 +166,6 @@ export default function BuscaTMDB() {
         )}
       </main>
 
-      {/* MODAL DE CRÍTICA IMEDIATA (POST COM STATUS ASSISTIDO) */}
       {filmeParaAvaliar && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl w-full max-w-md shadow-2xl">
